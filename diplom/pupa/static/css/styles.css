@@ -1,0 +1,159 @@
+/*
+Установка стандартного шрифта для всего сайта.
+- Шрифт: Arial, sans-serif.
+- Межстрочное расстояние: 1.6.
+- Удаление стандартных отступов и полей.
+- Фон: светло-серый (#f4f4f9).
+*/
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+/*
+Стили для заголовков (h1–h6).
+- Цвет текста: насыщенный серый (#333).
+- Отступ снизу: 10px.
+*/
+h1, h2, h3, h4, h5, h6 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/*
+Стили для ссылок (a).
+- Цвет текста: синий (#007bff).
+- Удаление подчеркивания.
+- При наведении: добавление подчеркивания.
+*/
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/*
+Стили для контейнера.
+- Максимальная ширина: 1200px.
+- Центрирование с помощью auto-отступов.
+- Внутренние отступы: 20px.
+*/
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/*
+Стили для навигационного меню.
+- Фон: белый (#fff).
+- Нижняя граница: светло-серая (1px, #ddd).
+*/
+.navbar {
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+/*
+Стили для бренда навигации.
+- Жирный текст.
+- Цвет: синий (#007bff).
+*/
+.navbar-brand {
+    font-weight: bold;
+    color: #007bff;
+}
+
+/*
+Стили для ссылок навигации.
+- Цвет текста: тёмно-серый (#555).
+- При наведении: синий (#007bff).
+*/
+.navbar-nav .nav-item .nav-link {
+    color: #555;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #007bff;
+}
+
+/*
+Стили для кнопок.
+- Цвет текста: белый.
+- Фон: синий (#007bff).
+- Отступы: 10px сверху и снизу, 20px слева и справа.
+- Закруглённые углы: 5px.
+- Изменение фона при наведении: более тёмный синий (#0056b3).
+*/
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/*
+Стили для формы.
+- Фон: белый (#fff).
+- Внутренние отступы: 20px.
+- Закруглённые углы: 5px.
+- Тень: лёгкая (2px, rgba(0, 0, 0, 0.1)).
+*/
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/*
+Стили для текстовых полей, полей пароля и текстовых областей.
+- Ширина: 100%.
+- Внутренние отступы: 8px.
+- Отступ снизу: 10px.
+- Граница: светло-серая (#ccc).
+- Закруглённые углы: 4px.
+*/
+input[type="text"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/*
+Стили для кнопок отправки формы.
+- Фон: синий (#007bff).
+- Цвет текста: белый.
+- Убираем границу.
+- Внутренние отступы: 10px.
+- Изменение фона при наведении: более тёмный синий (#0056b3).
+*/
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
