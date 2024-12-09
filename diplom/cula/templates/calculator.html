@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Calculator</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="screen" disabled>
+        </div>
+        <div class="buttons">
+            <!-- Первая строка -->
+            <button class="btn" onclick="press('1')">1</button>
+            <button class="btn" onclick="press('2')">2</button>
+            <button class="btn" onclick="press('3')">3</button>
+
+            <!-- Вторая строка -->
+            <button class="btn" onclick="press('4')">4</button>
+            <button class="btn" onclick="press('5')">5</button>
+            <button class="btn" onclick="press('6')">6</button>
+
+            <!-- Третья строка -->
+            <button class="btn" onclick="press('7')">7</button>
+            <button class="btn" onclick="press('8')">8</button>
+            <button class="btn" onclick="press('9')">9</button>
+
+            <!-- Четвёртая строка -->
+            <button class="btn" onclick="press('0')">0</button>
+            <button class="btn" onclick="press('.')">,</button>
+            <button class="btn" onclick="clearScreen()">C</button>
+
+            <!-- Пятая строка -->
+            <button class="btn operator" onclick="press('+')">+</button>
+            <button class="btn operator" onclick="press('-')">-</button>
+            <button class="btn operator" onclick="press('*')">*</button>
+            <button class="btn operator" onclick="press('/')">/</button>
+
+            <!-- Новые кнопки -->
+            <button class="btn operator" onclick="calculatePercentage()">%</button> <!-- Проценты -->
+            <button class="btn operator" onclick="press('**')">x^y</button> <!-- Возведение в степень -->
+
+            <!-- Кнопка "=" -->
+            <button class="btn equal" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * Добавляет символ (цифру, оператор или точку) на экран калькулятора.
+         *
+         * @param {string} value - Символ, который нужно добавить на экран.
+         */
+        function press(value) {
+            let screen = document.getElementById("screen");
+            if (value === ',') {
+                value = '.'; // Замена запятой на точку для дробных чисел
+            }
+            screen.value += value;
+        }
+
+        /**
+         * Очищает экран калькулятора.
+         */
+        function clearScreen() {
+            document.getElementById("screen").value = ""; // Сбрасываем значение экрана
+        }
+
+        /**
+         * Вычисляет процент текущего значения на экране.
+         * Делит значение на 100 и устанавливает результат на экран.
+         */
+        function calculatePercentage() {
+            let screen = document.getElementById("screen");
+            let currentValue = parseFloat(screen.value);
+            if (!isNaN(currentValue)) {
+                screen.value = currentValue / 100; // Делим число на 100
+            }
+        }
+
+        /**
+         * Отправляет математическое выражение на сервер для вычисления результата.
+         * Результат или сообщение об ошибке выводится на экран.
+         */
+        function calculate() {
+            let screen = document.getElementById("screen");
+            let expression = screen.value;
+
+            // Отправляем запрос на сервер
+            fetch("/calculate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ expression: expression })
+            })
+            .then(response => response.json()) // Преобразуем ответ в JSON
+            .then(data => {
+                if (data.result !== undefined) {
+                    screen.value = data.result; // Отображаем результат
+                } else {
+                    screen.value = data.error; // Показываем сообщение об ошибке
+                }
+            })
+            .catch(error => {
+                console.error("Ошибка:", error);
+                screen.value = "Ошибка!"; // Показываем сообщение об ошибке
+            });
+        }
+    </script>
+</body>
+</html>
